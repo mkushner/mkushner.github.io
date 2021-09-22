@@ -5,5 +5,7 @@
   "timeoutPM": "600000",
   "timeoutWake": "20000",
   "cloudWS": true,
-  "timeoutCFG": "600000"
+  "timeoutCFG": "600000",
+  "readCO": true,
+  "readPM": true
 }
