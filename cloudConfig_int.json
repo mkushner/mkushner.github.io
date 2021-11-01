@@ -1,8 +1,8 @@
 {
-  "DEBUG": true,
+  "DEBUG": false,
   "INTERVAL_M": true,
-  "timeoutCO": "300000",
-  "timeoutPM": "600000",
+  "timeoutCO": "120000",
+  "timeoutPM": "300000",
   "timeoutWake": "20000",
   "cloudWS": true,
   "timeoutCFG": "600000",
