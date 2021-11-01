@@ -1,5 +1,5 @@
 {
-  "DEBUG": true,
+  "DEBUG": false,
   "INTERVAL_M": true,
   "timeoutCO": "300000",
   "timeoutPM": "600000",
