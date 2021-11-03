@@ -1,6 +1,6 @@
 {
-  "DEBUG": false,
-  "INTERVAL_M": true,
+  "DEBUG": true,
+  "INTERVAL_M": false,
   "timeoutCO": "120000",
   "timeoutPM": "300000",
   "timeoutWake": "20000",
