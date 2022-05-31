@@ -16,13 +16,25 @@
     font-size: 8px;
   }
 </style>
-<p>connections (CSV):</p>
-<input id="csv" type="file" />
+<p>
+  <b>Clean render:</b><br />
+  <button type="reset" onclick="location.reload()">reset</button>
+</p>
+<p>
+  <b>Group by:</b><br />
+  <input type="form" id="group-type" value="Company" />
+</p>
+<p>
+  <b>Connections (CSV):</b><br />
+  <input id="csv" type="file" />
+</p>
+
 <p><svg></svg></p>
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.11/jquery.csv.min.js"></script>
+
 <script>
   var fileInput = document.getElementById('csv');
   var nodes = [];
@@ -30,9 +42,10 @@
 
   readFile = function () {
     var reader = new FileReader();
+    var groupType = document.getElementById('group-type').value;
     reader.onload = function () {
       connections = $.csv.toObjects(reader.result);
-      console.log(connections);
+      //console.log(connections);
 
       nodes.push({
         firstName: 'You',
@@ -53,14 +66,14 @@
           firstName: source['First Name'],
           lastName: source['Last Name'],
           name: sourceName,
-          company: source['Company'],
+          company: source[groupType],
         });
 
         for (target of connections) {
           targetName = target['First Name'] + ' ' + target['Last Name'];
           if (
             sourceName != targetName &&
-            source['Company'] == target['Company']
+            source[groupType] == target[groupType]
           ) {
             links.push({
               source: sourceName,
@@ -75,7 +88,7 @@
         links: links,
       };
 
-      console.log(graph);
+      //console.log(graph);
       render(graph);
     };
     reader.readAsBinaryString(fileInput.files[0]);
@@ -90,7 +103,6 @@
     var height = 7000;
 
     var svg = d3.select('svg').attr('width', width).attr('height', height);
-
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 
     simulation = d3
@@ -149,7 +161,6 @@
     });
 
     simulation.nodes(graph.nodes).on('tick', ticked);
-
     simulation.force('link').links(graph.links);
 
     function ticked() {
