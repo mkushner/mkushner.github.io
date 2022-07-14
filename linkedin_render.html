@@ -45,13 +45,12 @@
     var groupType = document.getElementById('group-type').value;
     reader.onload = function () {
       connections = $.csv.toObjects(reader.result);
-      //console.log(connections);
 
       nodes.push({
         firstName: 'You',
         lastName: '',
         name: 'You',
-        company: '',
+        groupBy: '',
       });
 
       for (source of connections) {
@@ -66,7 +65,7 @@
           firstName: source['First Name'],
           lastName: source['Last Name'],
           name: sourceName,
-          company: source[groupType],
+          groupBy: source[groupType],
         });
 
         for (target of connections) {
@@ -130,7 +129,7 @@
       .enter()
       .append('line')
       .attr('stroke-width', function (d) {
-        return color(d.company);
+        return color(d.groupBy);
       });
 
     var node = svg
@@ -145,7 +144,7 @@
       .append('circle')
       .attr('r', 5)
       .attr('fill', function (d) {
-        return color(d.company);
+        return color(d.groupBy);
       });
 
     var lables = node
@@ -157,7 +156,7 @@
       .attr('y', 3);
 
     node.append('title').text(function (d) {
-      return d.company;
+      return d.groupBy;
     });
 
     simulation.nodes(graph.nodes).on('tick', ticked);
