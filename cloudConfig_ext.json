@@ -6,6 +6,6 @@
   "timeoutWake": "20000",
   "cloudWS": true,
   "timeoutCFG": "600000",
-  "readCO": false,
+  "readCO": true,
   "readPM": true
 }
